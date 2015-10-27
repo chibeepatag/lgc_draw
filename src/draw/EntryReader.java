@@ -15,6 +15,7 @@ import java.util.Map;
 
 import model.Branch;
 import model.Entry;
+import model.Prize;
 
 /**
  * @author ChibeePatag
@@ -63,6 +64,41 @@ public class EntryReader {
 		
 		
 		return entries;
+	}
+	
+	public Map<String, List<Prize>> getPrizes(String prizeFileName){
+		Map<String, List<Prize>> prizes = new HashMap<String, List<Prize>>();
+		prizes.put("All", new ArrayList<Prize>());
+		prizes.put("Store", new ArrayList<Prize>());
+		File prizeFile = new File(prizeFileName);
+		
+		BufferedReader reader = null;		
+		
+		try {
+			reader = new BufferedReader(new FileReader(prizeFile));
+			String sCurrentLine;
+			reader.readLine(); // read header
+			while ((sCurrentLine = reader.readLine()) != null) {				
+				String[] lineArray = sCurrentLine.split(",");				
+				Prize prize = new Prize(lineArray[0], lineArray[1], Integer.parseInt(lineArray[2]));
+				prizes.get(prize.getPrize_level()).add(prize);			
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+		}finally{
+			if(reader != null){
+				try {
+					reader.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}				
+			}
+		}
+		
+		return prizes;
 	}
 
 }

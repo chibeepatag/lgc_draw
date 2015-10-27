@@ -36,7 +36,7 @@ public class SelectWinnersBtn extends JButton implements ActionListener {
 		Map<Branch, List<Entry>> entries = er.read_entries("2015-01-06_1420496014_s.csv");
 		Set<Branch> keys = entries.keySet();
 		
-		List<Prize> store_prizes = getStorePrizes();
+		Map<String, List<Prize>> store_prizes = er.getPrizes("prizes.csv");
 		
 		WinnerPicker winnerPicker = new WinnerPicker();
 		for (Branch branch : keys) {
@@ -44,7 +44,7 @@ public class SelectWinnersBtn extends JButton implements ActionListener {
 			
 			List<Entry> branch_entries = entries.get(branch);
 			
-			for (Prize prize : store_prizes) {
+			for (Prize prize : store_prizes.get("Store")) {
 				Winner winner = winnerPicker.pickWinner(prize, branch_entries);
 				winner.getEntry().getPrizes().add(prize);
 				
@@ -61,24 +61,6 @@ public class SelectWinnersBtn extends JButton implements ActionListener {
 		
 	}
 	
-	public  List<Prize> getStorePrizes(){
-		List<Prize> prizes = new ArrayList<Prize>();
-		
-		/******/
-		Prize cellphone1 = new Prize("Store", "Cellphone 1", 1);
-		prizes.add(cellphone1);
-		Prize cellphone2 = new Prize("Store", "Cellphone 2", 1);
-		prizes.add(cellphone2);
-		Prize cellphone3 = new Prize("Store", "Cellphone 3", 1);
-		prizes.add(cellphone3);
-		
-		Prize electricFan = new Prize("Store", "Electric Fan", 2);
-		prizes.add(electricFan);
-		
-		Prize flatScreen = new Prize("Store", "Flat Screen TV", 3);
-		prizes.add(flatScreen);
-		/******/
-		return prizes;		
-	}
+
 
 }
