@@ -3,14 +3,12 @@
  */
 package ui;
 
-import java.awt.Font;
 import java.awt.GridLayout;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 
 /**
@@ -18,7 +16,7 @@ import javax.swing.border.Border;
  *
  */
 public class SetupPanel extends JPanel {
-	JLabel luckyGrocersTitle;
+	JLabel luckyGrocersTitle;		
 	
 	public SetupPanel() {
 		GridLayout setupPanelLayout = new GridLayout(3, 1);
@@ -44,7 +42,7 @@ public class SetupPanel extends JPanel {
 		add(prizesPanel);
 		
 		JPanel buttonPanel = new JPanel(new GridLayout(1, 1));
-		SelectWinnersBtn selectWinnersBtn = new SelectWinnersBtn();
+		SelectWinnersBtn selectWinnersBtn = new SelectWinnersBtn(entriesFileNameTxt, prizesFileNameTxt);
 		buttonPanel.add(selectWinnersBtn);
 		add(buttonPanel);
 		
