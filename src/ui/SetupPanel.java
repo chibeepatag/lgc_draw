@@ -19,13 +19,18 @@ public class SetupPanel extends JPanel {
 	JLabel luckyGrocersTitle;		
 	
 	public SetupPanel() {
-		GridLayout setupPanelLayout = new GridLayout(3, 1);
+		GridLayout setupPanelLayout = new GridLayout(4, 1);
 		setupPanelLayout.setHgap(10);
 		setupPanelLayout.setVgap(10);
 		setLayout(setupPanelLayout);
 		
 		Border border = BorderFactory.createEmptyBorder(5, 5, 5, 5);
 		setBorder(border);
+		
+		JPanel errorPanel = new JPanel(new GridLayout(1, 1));
+		JLabel errorLabel = new JLabel();
+		errorPanel.add(errorLabel);
+		add(errorPanel);
 		
 		JPanel uploadEntriesPanel = new JPanel(new GridLayout(1, 2));		
 		JLabel entriesFileLb = new JLabel("Raffle Entries");
@@ -42,7 +47,7 @@ public class SetupPanel extends JPanel {
 		add(prizesPanel);
 		
 		JPanel buttonPanel = new JPanel(new GridLayout(1, 1));
-		SelectWinnersBtn selectWinnersBtn = new SelectWinnersBtn(entriesFileNameTxt, prizesFileNameTxt);
+		SelectWinnersBtn selectWinnersBtn = new SelectWinnersBtn(entriesFileNameTxt, prizesFileNameTxt, errorLabel);
 		buttonPanel.add(selectWinnersBtn);
 		add(buttonPanel);
 		
